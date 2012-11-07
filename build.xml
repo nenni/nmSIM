@@ -1,0 +1,50 @@
+<project name="nmSIM" default="build" basedir=".">
+	
+	<property name="lib" location="lib" />
+	<property name="src" location="src" />
+	<property name="resources" location="resources" />
+	
+    <property name="env.DEBUG_FLAGS" value="true" />
+
+	<property name="buildDir" location="build" />
+	<property name="outputClassDir" location="${buildDir}/bin" />
+	<property name="outputIarDir" location="${buildDir}/iar" />
+	
+	<target name="init">
+		<mkdir dir="${outputClassDir}" />
+		<mkdir dir="${outputIarDir}" />
+	</target>
+	
+	<target name="clean">
+		<delete dir="${buildDir}" />
+	</target>
+
+	<target name="makeClasses" depends="init">
+		<javac srcdir="${src}" destdir="${outputClassDir}" debug="${env.DEBUG_FLAGS}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+	</target>
+	
+	<macrodef name="doIar">
+		<attribute name="name" default="NOT SET" />
+		<sequential>
+			<jar destfile="${outputIarDir}/@{name}.iar">
+				<zipfileset dir="${resources}" includes="ims.xml" fullpath="IMS-INF/ims.xml" />
+				<zipfileset dir="${resources}" includes="imsapp-contrib.properties" fullpath="IMS-INF/imsapp-contrib.properties" />
+				<zipfileset dir="${outputClassDir}" includes="**/**" prefix="IMS-INF/classes" />
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<target name="makeAll" depends="makeClasses">
+		<doIar name="scifnmSIM" />
+	</target>
+
+	<target name="build" depends="makeAll">
+	</target>
+	
+</project>

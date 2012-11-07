@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ims-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <display-name>#nmSIM#</display-name>
+  <version>1</version>
+
+  <import-feature>
+    <name>ImscScifTjb-${NgIn.Srv.nmSIM.CALL_PROVIDER_TECHNO}</name>
+    <interface-name>com.hp.opencall.ngin.scif.impl.imsc.ImscScifFeatureSessionIntf</interface-name>
+  </import-feature>
+
+  <imslet>
+    <imslet-name>nmSIM</imslet-name>
+    <display-name>nmSIM</display-name>
+    <imslet-class>com.hp.opencall.ngin.nmsim.NmSimImslet</imslet-class>
+  </imslet>
+
+  <listener>
+    <listener-class>com.hp.opencall.ngin.timer.impl.imsc.ImscTimerDispatcher</listener-class>
+  </listener>
+
+</ims-app>
