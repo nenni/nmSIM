@@ -11,13 +11,13 @@ import com.hp.opencall.ngin.scif.CallLeg;
 
 public class NmSimMONewCgPA {
 
-	private Connection databaseConnection = null;
-	private PreparedStatement pStatement = null;
-	private ResultSet rSet;
+	private static Connection databaseConnection = null;
+	private static PreparedStatement pStatement = null;
+	private static ResultSet rSet;
 
 	private static Logger _log = Logger.getLogger(NmSimMONewCgPA.class);
 
-	public Address getNewCgPA(DataSource datasource, CallLeg leg) {
+	public static Address getNewCgPA(DataSource datasource, CallLeg leg) {
 
 		String amNumber = null;
 		Address newCgPA = null;
